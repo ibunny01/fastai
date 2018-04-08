@@ -1,0 +1,1500 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{dog\_breeds}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Dog Breeds Identification}\label{dog-breeds-identification}
+
+\href{https://www.kaggle.com/c/dog-breed-identification}{Kaggle链接}
+
+    \subsection{1. Imports}\label{imports}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{reload\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{conv\PYZus{}learner} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{transforms} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{conv\PYZus{}learner} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{model} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{dataset} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{sgdr} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{plots} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{PATH} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../data/dogbreed/}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{!}ls \PY{n+nv}{\PYZdl{}PATH}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+labels.csv  sample\_submission.csv  test  tmp  train
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{data\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{224}
+        \PY{n}{arch} \PY{o}{=} \PY{n}{resnext101\PYZus{}64}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{58}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{label\PYZus{}csv} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{labels.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{n}{label\PYZus{}csv}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+        
+        \PY{c+c1}{\PYZsh{} 由于数据集没有提供validation set，所以需要自己手动分割}
+        \PY{n}{val\PYZus{}idxs} \PY{o}{=} \PY{n}{get\PYZus{}cv\PYZus{}idxs}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} get cross\PYZhy{}validation set}
+        \PY{o}{??}get\PYZus{}cv\PYZus{}idxs\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ get_cv_idxs(n, cv_idx}\OperatorTok{=}\DecValTok{0}\NormalTok{, val_pct}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, seed}\OperatorTok{=}\DecValTok{42}\NormalTok{):}
+\NormalTok{    np.random.seed(seed)}
+\NormalTok{    n_val }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(val_pct}\OperatorTok{*}\NormalTok{n)}
+\NormalTok{    idx_start }\OperatorTok{=}\NormalTok{ cv_idx}\OperatorTok{*}\NormalTok{n_val}
+\NormalTok{    idxs }\OperatorTok{=}\NormalTok{ np.random.permutation(n)}
+    \ControlFlowTok{return}\NormalTok{ idxs[idx_start: idx_start}\OperatorTok{+}\NormalTok{n_val]}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{n} \PY{o}{*} \PY{l+m+mf}{0.2}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{val\PYZus{}idxs}\PY{o}{.}\PY{n}{size}\PY{p}{)}
+        \PY{n}{val\PYZus{}idxs}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10222
+2044.4
+2044
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} array([2882, 4514, 7717, {\ldots}, 8922, 6774,   37])
+\end{Verbatim}
+            
+    \subsection{2. Initial exploration}\label{initial-exploration}
+
+    先check一下label长啥样：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{label\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{label\PYZus{}csv}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{label\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}                                  id             breed
+         0  000bec180eb18c7604dcecc8fe0dba07       boston\_bull
+         1  001513dfcb2ffafc82cccf4d8bbaba97             dingo
+         2  001cdf01b096e06d78e9e5112d419397          pekinese
+         3  00214f311d5d2247d5dfe4fe24b2303d          bluetick
+         4  0021f9ceb3235effd7fcde7f7538ed62  golden\_retriever
+\end{Verbatim}
+            
+    按 \texttt{breeds}统计各种类的狗的数目，然后 \texttt{sort}一下降序显示：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{label\PYZus{}df}\PY{o}{.}\PY{n}{pivot\PYZus{}table}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{aggfunc}\PY{o}{=}\PY{n+nb}{len}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}                                  id
+         breed                              
+         scottish\_deerhound              126
+         maltese\_dog                     117
+         afghan\_hound                    116
+         entlebucher                     115
+         bernese\_mountain\_dog            114
+         shih-tzu                        112
+         great\_pyrenees                  111
+         pomeranian                      111
+         basenji                         110
+         samoyed                         109
+         airedale                        107
+         tibetan\_terrier                 107
+         leonberg                        106
+         cairn                           106
+         beagle                          105
+         japanese\_spaniel                105
+         australian\_terrier              102
+         blenheim\_spaniel                102
+         miniature\_pinscher              102
+         irish\_wolfhound                 101
+         lakeland\_terrier                 99
+         saluki                           99
+         papillon                         96
+         whippet                          95
+         siberian\_husky                   95
+         norwegian\_elkhound               95
+         pug                              94
+         chow                             93
+         italian\_greyhound                92
+         pembroke                         92
+         {\ldots}                             {\ldots}
+         german\_short-haired\_pointer      75
+         boxer                            75
+         bull\_mastiff                     75
+         borzoi                           75
+         pekinese                         75
+         cocker\_spaniel                   74
+         american\_staffordshire\_terrier   74
+         doberman                         74
+         brittany\_spaniel                 73
+         malinois                         73
+         standard\_schnauzer               72
+         flat-coated\_retriever            72
+         redbone                          72
+         border\_collie                    72
+         curly-coated\_retriever           72
+         kuvasz                           71
+         chihuahua                        71
+         soft-coated\_wheaten\_terrier      71
+         french\_bulldog                   70
+         vizsla                           70
+         tibetan\_mastiff                  69
+         german\_shepherd                  69
+         giant\_schnauzer                  69
+         walker\_hound                     69
+         otterhound                       69
+         golden\_retriever                 67
+         brabancon\_griffon                67
+         komondor                         67
+         briard                           66
+         eskimo\_dog                       66
+         
+         [120 rows x 1 columns]
+\end{Verbatim}
+            
+    \subsubsection{Steps}\label{steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Enable data augmentation, and precompute=True
+\item
+  Use \texttt{lr\_find()} to find highest learning rate where loss is
+  still clearly improving
+\item
+  Train last layer from precomputed activations for 1-2 epochs
+\item
+  Train last layer with data augmentation (i.e. precompute=False) for
+  2-3 epochs with cycle\_len=1
+\item
+  Unfreeze all layers
+\item
+  Set earlier layers to 3x-10x lower learning rate than next higher
+  layer
+\item
+  Use \texttt{lr\_find()} again
+\item
+  Train full network with cycle\_mult=2 until over-fitting
+\item
+  1:33:00 in the video ------ Increase train dataset size
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{tfms} \PY{o}{=} \PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data\PYZus{}size}\PY{p}{,} \PY{n}{aug\PYZus{}tfms}\PY{o}{=}\PY{n}{transforms\PYZus{}side\PYZus{}on}\PY{p}{,} \PY{n}{max\PYZus{}zoom}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}csv}\PY{p}{(}\PY{n}{PATH}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label\PYZus{}csv}\PY{p}{,} \PY{n}{test\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                             \PY{n}{val\PYZus{}idxs}\PY{o}{=}\PY{n}{val\PYZus{}idxs}\PY{p}{,} \PY{n}{suffix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{,} \PY{n}{bs} \PY{o}{=} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    取一张训练集的图片check一下：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{n}{PATH}\PY{o}{+}\PY{n}{data}\PY{o}{.}\PY{n}{trn\PYZus{}ds}\PY{o}{.}\PY{n}{fnames}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{;} \PY{n}{file\PYZus{}name}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} '../../data/dogbreed/train/001513dfcb2ffafc82cccf4d8bbaba97.jpg'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{img} \PY{o}{=} \PY{n}{PIL}\PY{o}{.}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{file\PYZus{}name}\PY{p}{)}\PY{p}{;} \PY{n}{img}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}15}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    check一下数据集可以看到，这些dog都是比较居中的，所以不用考虑太多crop和zoom
+in的问题。
+
+但如果场景是medical image，比如肿瘤啥的，那它们一般都是tiny
+piece并且可能分布在图片的各个角落，这种情况就比较复杂。
+
+    接下来就check一下数据集的image的size，ImageNet的图片都是224x224 /
+229x229的：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{img}\PY{o}{.}\PY{n}{size}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (500, 375)
+\end{Verbatim}
+            
+    \textbf{Dictionary Comprehension}
+
+size\_dictionary = \{filename: image\_size\}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{size\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{k}\PY{p}{:} \PY{n}{PIL}\PY{o}{.}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{PATH}\PY{o}{+}\PY{n}{k}\PY{p}{)}\PY{o}{.}\PY{n}{size} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{trn\PYZus{}ds}\PY{o}{.}\PY{n}{fnames}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    统计image的宽和高： * \texttt{size\_dict.values()} ：图片的sizes
+\texttt{({[}(500,350),\ (500,\ 500),...{]})}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{zip(*)} 展开参数列表
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{row\PYZus{}sz}\PY{p}{,} \PY{n}{col\PYZus{}sz} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n}{size\PYZus{}dict}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{row\PYZus{}sz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{row\PYZus{}sz}\PY{p}{)}\PY{p}{;} \PY{n}{col\PYZus{}sz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{col\PYZus{}sz}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{row\PYZus{}sz}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} array([500, 500, 500, 500, 500])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{row\PYZus{}sz}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} (array([3023., 5024.,   92.,   15.,    5.,    3.,   13.,    2.,    0.,    1.]),
+          array([  97. ,  413.7,  730.4, 1047.1, 1363.8, 1680.5, 1997.2, 2313.9, 2630.6, 2947.3, 3264. ]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    画出row的直方图后发现，有些image的row高达
+\texttt{2000\textasciitilde{}3000}。不过大部分都集中在 \texttt{500}。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{row\PYZus{}sz}\PY{p}{[}\PY{n}{row\PYZus{}sz} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} (array([ 135.,  592., 1347., 1164., 4599.,  128.,   76.,   62.,   14.,   11.]),
+          array([ 97. , 185.5, 274. , 362.5, 451. , 539.5, 628. , 716.5, 805. , 893.5, 982. ]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{col\PYZus{}sz}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} (array([2870., 5121.,  128.,   25.,   10.,   15.,    5.,    2.,    0.,    2.]),
+          array([ 102.,  348.,  594.,  840., 1086., 1332., 1578., 1824., 2070., 2316., 2562.]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{col\PYZus{}sz}\PY{p}{[}\PY{n}{col\PYZus{}sz} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} (array([ 235.,  733., 2205., 2979., 1807.,   98.,   27.,   33.,    7.,   10.]),
+          array([102., 190., 278., 366., 454., 542., 630., 718., 806., 894., 982.]),
+          <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{trn\PYZus{}ds}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{test\PYZus{}ds}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} (8178, 10356)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{classes}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{classes}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} (120,
+          ['affenpinscher',
+           'afghan\_hound',
+           'african\_hunting\_dog',
+           'airedale',
+           'american\_staffordshire\_terrier'])
+\end{Verbatim}
+            
+    \subsection{3. Initial model}\label{initial-model}
+
+    一开始把图片都resize得比较小，然后train一发model，这样比较快手，可以很快看到结果。之后再把size调大。
+
+如果调大size之后GPU受不了了，可以把batch\_size适当调小。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}data}\PY{p}{(}\PY{n}{data\PYZus{}size}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tfms} \PY{o}{=} \PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data\PYZus{}size}\PY{p}{,} \PY{n}{aug\PYZus{}tfms}\PY{o}{=}\PY{n}{transforms\PYZus{}side\PYZus{}on}\PY{p}{,} \PY{n}{max\PYZus{}zoom}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}csv}\PY{p}{(}\PY{n}{PATH}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label\PYZus{}csv}\PY{p}{,} \PY{n}{test\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                             \PY{n}{val\PYZus{}idxs}\PY{o}{=}\PY{n}{val\PYZus{}idxs}\PY{p}{,} \PY{n}{suffix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{,} \PY{n}{bs} \PY{o}{=} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+             \PY{k}{return} \PY{n}{data} \PY{k}{if} \PY{n}{data\PYZus{}size} \PY{o}{\PYZgt{}} \PY{l+m+mi}{300} \PY{k}{else} \PY{n}{data}\PY{o}{.}\PY{n}{resize}\PY{p}{(}\PY{l+m+mi}{340}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{3.1 Precompute}\label{precompute}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{data} \PY{o}{=} \PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{data\PYZus{}size}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=6), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{o}{??}ConvLearner.pretrained\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{precompute=True}，pre compute the activation of the last conv
+layer.
+
+也就是说在我们最后加的随机初始化的FC层之前的卷积层的activation
+function（\(\mathrm {relu(wx+b})\)）的output都用预训练好的值。
+
+直接输入\texttt{learn}可以看到我们的FC层的结构：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}learn}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} Sequential(
+           (0): BatchNorm1d(4096, eps=1e-05, momentum=0.1, affine=True)
+           (1): Dropout(p=0.25)
+           (2): Linear(in\_features=4096, out\_features=512)
+           (3): ReLU()
+           (4): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True)
+           (5): Dropout(p=0.5)
+           (6): Linear(in\_features=512, out\_features=120)
+           (7): LogSoftmax()
+         )
+\end{Verbatim}
+            
+    默认的dropout参数是：\texttt{p1=0.25,\ p2=0.5}。That works pretty well
+for most things.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}learn.fit(1e\PYZhy{}2, 3)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=3), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.92248 0.36635 0.9142 ]                            
+[1.      0.40468 0.29038 0.91906]                            
+[2.      0.29487 0.26208 0.92433]                            
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}learn = ConvLearner.pretrained(arch, data, ps=0, precompute=True)}
+\end{Verbatim}
+
+
+    不想要dropout的话，set \texttt{ps=0}就行:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}learn}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} Sequential(
+           (0): BatchNorm1d(4096, eps=1e-05, momentum=0.1, affine=True)
+           (1): Linear(in\_features=4096, out\_features=512)
+           (2): ReLU()
+           (3): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True)
+           (4): Linear(in\_features=512, out\_features=120)
+           (5): LogSoftmax()
+         )
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}learn.fit(1e\PYZhy{}2, 3)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=3), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.60955 0.34699 0.92187]                            
+[1.      0.23906 0.29609 0.91619]                            
+[2.      0.13197 0.28256 0.92146]                            
+
+
+    \end{Verbatim}
+
+    可以看到，不用dropout，accuracy是高开低走。
+
+    如果想对不同层的dropout用不同的p，只需要传入一个列表，如ps={[}0.3,
+0.5{]}；同时注意到，上面的\texttt{learn}都有两个linear
+layer，我们可以通过参数\texttt{xtra\_fc}来设置linear layer：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}learn = ConvLearner.pretrained(arch, data, ps=0, precompute=True, xtra\PYZus{}fc=[])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}learn}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} Sequential(
+           (0): BatchNorm1d(4096, eps=1e-05, momentum=0.1, affine=True)
+           (1): Linear(in\_features=4096, out\_features=120)
+           (2): LogSoftmax()
+         )
+\end{Verbatim}
+            
+    可以看到，上面只有1个Linear layer，输入为4096维，输出为120维（类别数）。
+
+最后accuracy也不太差，因为这个dog breed数据集本来就比较ImageNet。
+
+但是下面这个结果显然是overfitting了，因为train-loss比valid-loss小很多。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{}learn.fit(1e\PYZhy{}2, 3)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=3), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.45234 0.26578 0.92146]                            
+[1.      0.16864 0.25277 0.92337]                            
+[2.      0.10206 0.23486 0.92672]                             
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=5), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.91663 0.36728 0.91667]                            
+[1.      0.42076 0.28196 0.92146]                            
+[2.      0.29265 0.24947 0.92912]                            
+[3.      0.22237 0.24331 0.92768]                            
+[4.      0.18617 0.23318 0.92816]                            
+
+
+    \end{Verbatim}
+
+    \subsubsection{3.2 Augment}\label{augment}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{data} \PY{o}{=} \PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{data\PYZus{}size}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=6), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ps}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=2), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      1.14446 0.42594 0.91188]                           
+[1.      0.5183  0.29981 0.92337]                            
+
+
+    \end{Verbatim}
+
+    Turn off precompute.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{precompute}\PY{o}{=}\PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=5), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.45847 0.27211 0.92289]                            
+[1.      0.42429 0.2569  0.93056]                            
+[2.      0.37954 0.24652 0.92385]                            
+[3.      0.36439 0.23807 0.93056]                            
+[4.      0.33093 0.23378 0.92816]                            
+
+
+    \end{Verbatim}
+
+    Save model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{224\PYZus{}pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{224\PYZus{}pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{3.3 Increase image size}\label{increase-image-size}
+
+【Amazing Trick】
+
+【防overfitting】
+
+先用224x224的image size训练几个epoch，再换成299x299的image
+size训练几个epoch。
+
+通过\texttt{set\_data} pass in a larger
+dataset。注意这里call了\texttt{freeze}，因为只想训练后面的FC层，前面的不用动了。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{l+m+mi}{299}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{freeze}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=6), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=3), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.32129 0.23073 0.92768]                            
+[1.      0.30894 0.22686 0.92433]                            
+[2.      0.31302 0.22338 0.9272 ]                            
+
+
+    \end{Verbatim}
+
+    注意看上面的结果 {[}epoch train\_loss valid\_loss accuracy{]}
+
+train\_loss比valid\_loss大得多，可见我们不仅没有overfitting还underfitting了。
+
+这说明我们的参数\texttt{cycle\_len=1}设得小了。pop
+out的间隔太短，每个cycle
+optimizer还没找到一个minimum你就强制人家跳出去了。所以下面把cycle变长一点，再训练一发。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.28207 0.21586 0.9296 ]                            
+[1.      0.26637 0.21276 0.93056]                            
+[2.      0.24564 0.20874 0.93343]                            
+[3.      0.23391 0.20963 0.93103]                            
+[4.      0.22986 0.20905 0.93439]                            
+[5.      0.21261 0.20457 0.93247]                            
+[6.      0.20275 0.20283 0.93247]                            
+
+
+    \end{Verbatim}
+
+    嘻嘻，现在train\_loss和valid\_loss就差不多一样了。
+
+    \subsubsection{3.4 Test Time Augmentation}\label{test-time-augmentation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} log\PYZus{}preds, y = learn.TTA()}
+         \PY{c+c1}{\PYZsh{} probs = np.exp(log\PYZus{}preds)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} (5, 2044, 120)  2044=len(validation)}
+         \PY{c+c1}{\PYZsh{} probs.shape}
+\end{Verbatim}
+
+
+    TTA已经变了。 \textgreater{}As mentioned in "Change to how TTA() works"
+(http://forums.fast.ai/t/change-to-how-tta-works/8474), it used to be
+that: TTA() is averaging the log of the softmax layer, rather than the
+probabilities. This was changed to: return the actual individual TTA
+predictions, which you then average yourself This commit attempts to
+update the lesson 2 notebook to align with that change.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{multi\PYZus{}preds}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{TTA}\PY{p}{(}\PY{p}{)}
+         \PY{n}{log\PYZus{}preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{multi\PYZus{}preds}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{log\PYZus{}preds}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                             
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} (2044, 120)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{log\PYZus{}preds}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} array([[-13.10317, -13.87498, -12.21084, -13.3525 , -11.25488, -12.85819, -14.81724,  -9.2209 , -12.11693,
+                 -13.22008, -13.6223 , -13.85686, -12.68083, -13.15262, -14.17028, -12.03528, -13.2036 , -13.54894,
+                 -12.50569,  -0.00283, -12.16657,  -9.27254, -11.71905, -13.75403, -16.74246, -11.86111, -13.70628,
+                  -9.26507, -13.75389, -10.08523, -12.71445, -14.04674, -13.60507, -13.51319, -14.5106 , -14.63395,
+                 -10.90799, -11.93482, -11.52298, -14.30947, -13.34139, -11.68174, -13.01618, -11.18162, -15.40301,
+                  -6.41498, -11.98755, -13.44295, -13.85136, -14.3326 , -14.71216, -13.83372, -14.56264, -12.54911,
+                 -12.41259, -11.2616 , -12.52106, -13.29219, -13.41801, -14.38233, -10.61311, -10.38132, -13.91064,
+                 -11.07827, -14.5192 , -15.02982, -14.78385, -13.17288, -15.2282 , -14.89726, -15.15066, -10.37935,
+                 -11.86456, -14.90708, -11.2053 , -11.61255, -13.96517, -11.71519, -16.04632, -14.43226, -13.07947,
+                 -13.9127 , -12.59729, -16.62423, -12.00477, -12.055  , -14.288  , -12.67123, -10.39007, -12.70229,
+                 -15.63933, -14.20441, -13.62978, -13.69696, -13.39105, -14.06765, -13.34487, -13.48539, -14.95106,
+                 -12.53096, -13.88279, -10.4652 , -13.40776, -14.88674, -12.11378, -13.77212, -14.04475, -13.89622,
+                 -15.39555, -13.9675 , -14.23985,  -8.95298, -13.37739, -12.48174, -13.17044, -13.74545, -13.10853,
+                 -13.73976, -15.29595, -14.2385 ],
+                [-14.70189, -10.21534, -10.23504, -12.29331, -11.94415, -11.74932, -13.86937, -12.23216,  -9.58735,
+                  -9.51403, -10.06615, -13.70654,  -6.91798, -13.41147, -11.93592,  -0.07732, -11.30973, -10.79137,
+                 -11.90855, -11.12621, -13.02384, -11.75714, -12.37351, -12.72659, -11.91725, -13.42693, -13.599  ,
+                 -12.46726, -11.49454, -14.19067, -13.44384, -13.32164, -13.2376 , -12.77621, -11.3026 , -11.97374,
+                 -12.39102, -11.54062, -12.23176,  -8.21112,  -8.37971, -10.05323,  -8.64046, -11.96735, -12.84326,
+                 -14.81948, -13.97416,  -6.37871, -11.05537, -14.67298, -13.51523, -10.7043 , -11.98657, -11.5733 ,
+                 -12.60873, -11.04332, -14.05121, -13.03499, -11.21325, -10.50628, -10.7311 , -10.04005, -13.31307,
+                  -8.61488, -10.90699, -12.09749, -11.98237, -11.37331, -14.67373, -13.92978, -12.14314, -10.71105,
+                 -13.23889, -13.09624, -11.93905, -13.65951, -10.92832, -11.87998, -12.15371, -14.29813, -13.9125 ,
+                 -14.92548, -11.34483, -13.22596, -11.17599, -12.55454, -15.8737 , -13.58804, -12.64892,  -9.32926,
+                 -13.71878, -13.93743, -11.45612,  -7.97707, -12.23155, -14.02264, -14.02765, -10.15217, -11.74647,
+                 -12.10046, -12.05102, -12.08985, -11.90033, -12.63771, -12.46199,  -7.4136 ,  -9.87666, -14.72077,
+                 -12.81067, -12.53206, -12.52369,  -9.20701, -12.55112,  -2.79785, -10.86429, -12.24441, -11.83849,
+                  -8.29936, -11.1113 , -13.25906]], dtype=float32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}preds}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{accuracy}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{metrics}\PY{o}{.}\PY{n}{log\PYZus{}loss}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{probs}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} (0.9344422700587084, 0.19454925997810996)
+\end{Verbatim}
+            
+    Didn't help a lot, just a tiny bit.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{299\PYZus{}pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{299\PYZus{}pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    到此为止已经nearly done了，不过我们再set
+\texttt{cycle\_len=2}来看看是否还会got any better。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=2), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.      0.21531 0.20767 0.93151]                            
+[1.      0.19735 0.20431 0.93343]                            
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{299\PYZus{}pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{299\PYZus{}pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{multi\PYZus{}preds}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{TTA}\PY{p}{(}\PY{p}{)}
+         \PY{n}{log\PYZus{}preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{multi\PYZus{}preds}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}preds}\PY{p}{)}
+         \PY{n}{accuracy}\PY{p}{(}\PY{n}{log\PYZus{}preds}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{,} \PY{n}{metrics}\PY{o}{.}\PY{n}{log\PYZus{}loss}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{probs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                             
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} (0.9344422700587084, 0.19276624004434073)
+\end{Verbatim}
+            
+    \subsection{4. Test}\label{test}
+
+Actually we use learn.TTA both on validation set and on test set when
+running predictions. The only difference is that we pass it an argument
+is\_test=True when we are using it on the test set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{test\PYZus{}preds}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{TTA}\PY{p}{(}\PY{n}{is\PYZus{}test}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                              
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{test\PYZus{}preds}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} (5, 10356, 120)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{test\PYZus{}preds}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+         \PY{n}{probs}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} (10356, 120)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{probs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} array([0.     , 0.00064, 0.00004, 0.     , 0.     , 0.     , 0.     , 0.     , 0.0001 , 0.     , 0.     ,
+                0.00005, 0.     , 0.00048, 0.     , 0.00001, 0.00002, 0.     , 0.00001, 0.     , 0.     , 0.00001,
+                0.     , 0.00001, 0.00018, 0.     , 0.     , 0.     , 0.     , 0.     , 0.     , 0.0004 , 0.07379,
+                0.00005, 0.00001, 0.     , 0.     , 0.     , 0.     , 0.     , 0.02456, 0.8477 , 0.00002, 0.     ,
+                0.00002, 0.     , 0.     , 0.00001, 0.     , 0.     , 0.00009, 0.00008, 0.     , 0.     , 0.     ,
+                0.     , 0.00002, 0.     , 0.00004, 0.     , 0.     , 0.0005 , 0.     , 0.     , 0.     , 0.     ,
+                0.     , 0.     , 0.     , 0.00002, 0.00001, 0.     , 0.     , 0.     , 0.     , 0.     , 0.     ,
+                0.0001 , 0.00051, 0.     , 0.     , 0.     , 0.     , 0.     , 0.00002, 0.     , 0.     , 0.     ,
+                0.     , 0.     , 0.     , 0.     , 0.00004, 0.     , 0.00001, 0.     , 0.00001, 0.     , 0.     ,
+                0.00001, 0.00001, 0.     , 0.00002, 0.     , 0.00001, 0.00009, 0.     , 0.00065, 0.     , 0.00013,
+                0.     , 0.     , 0.     , 0.00001, 0.     , 0.00137, 0.00001, 0.00001, 0.00001, 0.00001],
+               dtype=float32)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{classes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{classes}\PY{p}{)}
+         \PY{n}{classes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} array(['affenpinscher', 'afghan\_hound', 'african\_hunting\_dog', 'airedale', 'american\_staffordshire\_terrier',
+                'appenzeller', 'australian\_terrier', 'basenji', 'basset', 'beagle', 'bedlington\_terrier',
+                'bernese\_mountain\_dog', 'black-and-tan\_coonhound', 'blenheim\_spaniel', 'bloodhound', 'bluetick',
+                'border\_collie', 'border\_terrier', 'borzoi', 'boston\_bull', 'bouvier\_des\_flandres', 'boxer',
+                'brabancon\_griffon', 'briard', 'brittany\_spaniel', 'bull\_mastiff', 'cairn', 'cardigan',
+                'chesapeake\_bay\_retriever', 'chihuahua', 'chow', 'clumber', 'cocker\_spaniel', 'collie',
+                'curly-coated\_retriever', 'dandie\_dinmont', 'dhole', 'dingo', 'doberman', 'english\_foxhound',
+                'english\_setter', 'english\_springer', 'entlebucher', 'eskimo\_dog', 'flat-coated\_retriever',
+                'french\_bulldog', 'german\_shepherd', 'german\_short-haired\_pointer', 'giant\_schnauzer',
+                'golden\_retriever', 'gordon\_setter', 'great\_dane', 'great\_pyrenees', 'greater\_swiss\_mountain\_dog',
+                'groenendael', 'ibizan\_hound', 'irish\_setter', 'irish\_terrier', 'irish\_water\_spaniel',
+                'irish\_wolfhound', 'italian\_greyhound', 'japanese\_spaniel', 'keeshond', 'kelpie',
+                'kerry\_blue\_terrier', 'komondor', 'kuvasz', 'labrador\_retriever', 'lakeland\_terrier', 'leonberg',
+                'lhasa', 'malamute', 'malinois', 'maltese\_dog', 'mexican\_hairless', 'miniature\_pinscher',
+                'miniature\_poodle', 'miniature\_schnauzer', 'newfoundland', 'norfolk\_terrier', 'norwegian\_elkhound',
+                'norwich\_terrier', 'old\_english\_sheepdog', 'otterhound', 'papillon', 'pekinese', 'pembroke',
+                'pomeranian', 'pug', 'redbone', 'rhodesian\_ridgeback', 'rottweiler', 'saint\_bernard', 'saluki',
+                'samoyed', 'schipperke', 'scotch\_terrier', 'scottish\_deerhound', 'sealyham\_terrier',
+                'shetland\_sheepdog', 'shih-tzu', 'siberian\_husky', 'silky\_terrier', 'soft-coated\_wheaten\_terrier',
+                'staffordshire\_bullterrier', 'standard\_poodle', 'standard\_schnauzer', 'sussex\_spaniel',
+                'tibetan\_mastiff', 'tibetan\_terrier', 'toy\_poodle', 'toy\_terrier', 'vizsla', 'walker\_hound',
+                'weimaraner', 'welsh\_springer\_spaniel', 'west\_highland\_white\_terrier', 'whippet',
+                'wire-haired\_fox\_terrier', 'yorkshire\_terrier'], dtype='<U30')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{sample\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{sample\PYZus{}submission.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sample\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:}                                  id  affenpinscher  afghan\_hound  \textbackslash{}
+         0  000621fb3cbb32d8935728e48679680e       0.008333      0.008333   
+         1  00102ee9d8eb90812350685311fe5890       0.008333      0.008333   
+         2  0012a730dfa437f5f3613fb75efcd4ce       0.008333      0.008333   
+         3  001510bc8570bbeee98c8d80c8a95ec1       0.008333      0.008333   
+         4  001a5f3114548acdefa3d4da05474c2e       0.008333      0.008333   
+         
+            african\_hunting\_dog  airedale  american\_staffordshire\_terrier  appenzeller  \textbackslash{}
+         0             0.008333  0.008333                        0.008333     0.008333   
+         1             0.008333  0.008333                        0.008333     0.008333   
+         2             0.008333  0.008333                        0.008333     0.008333   
+         3             0.008333  0.008333                        0.008333     0.008333   
+         4             0.008333  0.008333                        0.008333     0.008333   
+         
+            australian\_terrier   basenji    basset        {\ldots}          toy\_poodle  \textbackslash{}
+         0            0.008333  0.008333  0.008333        {\ldots}            0.008333   
+         1            0.008333  0.008333  0.008333        {\ldots}            0.008333   
+         2            0.008333  0.008333  0.008333        {\ldots}            0.008333   
+         3            0.008333  0.008333  0.008333        {\ldots}            0.008333   
+         4            0.008333  0.008333  0.008333        {\ldots}            0.008333   
+         
+            toy\_terrier    vizsla  walker\_hound  weimaraner  welsh\_springer\_spaniel  \textbackslash{}
+         0     0.008333  0.008333      0.008333    0.008333                0.008333   
+         1     0.008333  0.008333      0.008333    0.008333                0.008333   
+         2     0.008333  0.008333      0.008333    0.008333                0.008333   
+         3     0.008333  0.008333      0.008333    0.008333                0.008333   
+         4     0.008333  0.008333      0.008333    0.008333                0.008333   
+         
+            west\_highland\_white\_terrier   whippet  wire-haired\_fox\_terrier  \textbackslash{}
+         0                     0.008333  0.008333                 0.008333   
+         1                     0.008333  0.008333                 0.008333   
+         2                     0.008333  0.008333                 0.008333   
+         3                     0.008333  0.008333                 0.008333   
+         4                     0.008333  0.008333                 0.008333   
+         
+            yorkshire\_terrier  
+         0           0.008333  
+         1           0.008333  
+         2           0.008333  
+         3           0.008333  
+         4           0.008333  
+         
+         [5 rows x 121 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{n}{filenames2} \PY{o}{=} \PY{n}{sample\PYZus{}df}\PY{o}{.}\PY{n}{id}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{filenames2}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:} (10357,)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{filenames} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{basename}\PY{p}{(}\PY{n}{fn}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{fn} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{test\PYZus{}ds}\PY{o}{.}\PY{n}{fnames}\PY{p}{]}\PY{p}{)}
+         \PY{n}{filenames}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:} array(['09b770df98721d813129ba5c789b08a5', '53a13ab77b9ed9e2a062511f4cb39804',
+                'c8c9ad5883f6ef16fadc73890308d6f0', 'b92c1a04f7cd7b913a705fae4877dee6',
+                '20654ff0191d11ccbcde05f4204fe3b3'], dtype='<U32')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{probs}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{filenames}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{classes}\PY{p}{)}
+          \PY{n}{frame}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{formater}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.06f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}  
+          \PY{n}{frame} \PY{o}{=} \PY{n}{frame}\PY{o}{.}\PY{n}{applymap}\PY{p}{(}\PY{n}{formater}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{c+c1}{\PYZsh{}frame.ix[6584]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{frame}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{dog\PYZus{}breed\PYZus{}result\PYZus{}180114.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{n}{frame}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}142}]:} (10356, 120)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{dog\PYZus{}breed\PYZus{}result\PYZus{}180114.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{n}{df1}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}144}]:}                                  id  affenpinscher  afghan\_hound  \textbackslash{}
+          0  09b770df98721d813129ba5c789b08a5       0.000003      0.000639   
+          1  53a13ab77b9ed9e2a062511f4cb39804       0.000074      0.000270   
+          2  c8c9ad5883f6ef16fadc73890308d6f0       0.000000      0.000000   
+          3  b92c1a04f7cd7b913a705fae4877dee6       0.000000      0.000000   
+          4  20654ff0191d11ccbcde05f4204fe3b3       0.000000      0.000000   
+          
+             african\_hunting\_dog  airedale  american\_staffordshire\_terrier  appenzeller  \textbackslash{}
+          0             0.000036  0.000000                        0.000003     0.000001   
+          1             0.000029  0.000074                        0.000010     0.000007   
+          2             0.000000  0.000000                        0.000000     0.000000   
+          3             0.000001  0.000000                        0.000000     0.000002   
+          4             0.000000  0.002787                        0.000001     0.000001   
+          
+             australian\_terrier   basenji    basset        {\ldots}          toy\_poodle  \textbackslash{}
+          0            0.000000  0.000000  0.000101        {\ldots}            0.000002   
+          1            0.000016  0.000002  0.000004        {\ldots}            0.000153   
+          2            0.000000  0.000006  0.000007        {\ldots}            0.000000   
+          3            0.000000  0.000001  0.000000        {\ldots}            0.000000   
+          4            0.000007  0.000000  0.000003        {\ldots}            0.000002   
+          
+             toy\_terrier    vizsla  walker\_hound  weimaraner  welsh\_springer\_spaniel  \textbackslash{}
+          0     0.000001  0.000001      0.000005    0.000001                0.001365   
+          1     0.000002  0.000027      0.000047    0.000004                0.000041   
+          2     0.000000  0.001102      0.000012    0.000001                0.000000   
+          3     0.000001  0.000000      0.000000    0.000000                0.000000   
+          4     0.000000  0.000004      0.000004    0.000005                0.000002   
+          
+             west\_highland\_white\_terrier   whippet  wire-haired\_fox\_terrier  \textbackslash{}
+          0                     0.000010  0.000006                 0.000006   
+          1                     0.000004  0.000034                 0.000050   
+          2                     0.000000  0.000001                 0.000000   
+          3                     0.000000  0.000004                 0.000000   
+          4                     0.000001  0.000000                 0.000061   
+          
+             yorkshire\_terrier  
+          0           0.000009  
+          1           0.000006  
+          2           0.000000  
+          3           0.000000  
+          4           0.000001  
+          
+          [5 rows x 121 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{n}{df1}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}145}]:} (10356, 121)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{df1}\PY{o}{.}\PY{n}{id}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:} (10356,)
+\end{Verbatim}
+            
+    \subsubsection{How to create submission
+file}\label{how-to-create-submission-file}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{test\PYZus{}preds}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{learn}\PY{o}{.}\PY{n}{TTA}\PY{p}{(}\PY{n}{is\PYZus{}test}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{test\PYZus{}preds}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{probs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{probs}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{classes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} 去掉后缀.jpg}
+        \PY{n}{df}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{o}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]} \PY{k}{for} \PY{n}{o} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{test\PYZus{}ds}\PY{o}{.}\PY{n}{fnames}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{SUBM} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{subm/}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{SUBM}\PY{p}{,} \PY{n}{exist\PYZus{}ok}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
